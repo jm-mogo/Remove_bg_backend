@@ -38,14 +38,14 @@ class Model(BaseModel):
 async def set_model(model: Model):
   res = model.model in models.keys()
   if res:
-     return model.model + " is a model"
+    return model.model + " is a model"
   return model.model + " is not a model"
 
 @app.get("/remove_background")
 def remove_background():
   session = new_session(model_name)
-  input_path = 'imageUploaded.jpg'
-  output_path = 'output.png'
+  input_path = './images/imageUploaded.jpg'
+  output_path = './images/output.png'
 
   input = Image.open(input_path)
   output = remove(input, session=session)
@@ -57,5 +57,5 @@ def remove_background():
 @app.post("/upload_img")
 def upload_file(file: UploadFile):
     input = Image.open(file.file)
-    input.save("imageUploaded.jpg")
+    input.save("./images/imageUploaded.jpg")
     return "ok"
