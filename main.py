@@ -21,28 +21,28 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-models = {
-  "silueta": "silueta",
-  "general": "u2netp",
-  "general2": "isnet-general-use",
-  "human": "u2net_human_seg"
-}
+# models = {
+#   "silueta": "silueta",
+#   "general": "u2netp",
+#   "general2": "isnet-general-use",
+#   "human": "u2net_human_seg"
+# }
 
-model_name = models["general2"]
+# model_name = models["general2"]
 
 class Model(BaseModel):
   model: str
 
 
-@app.post("/set_model")
-async def set_model(model: Model):
-  res = model.model in models.keys()
-  if res:
-    return model.model + " is a model"
-  return model.model + " is not a model"
+# @app.post("/set_model")
+# async def set_model(model: Model):
+#   res = model.model in models.keys()
+#   if res:
+#     return model.model + " is a model"
+#   return model.model + " is not a model"
 
-@app.get("/remove_background")
-def remove_background():
+@app.get("/remove_background/{model_name}" )
+def remove_background(model_name = str):
   session = new_session(model_name)
   input_path = './images/imageUploaded.jpg'
   output_path = './images/output.png'
