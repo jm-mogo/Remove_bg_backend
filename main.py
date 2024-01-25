@@ -28,18 +28,9 @@ app.add_middleware(
 #   "human": "u2net_human_seg"
 # }
 
-# model_name = models["general2"]
-
 class Model(BaseModel):
   model: str
 
-
-# @app.post("/set_model")
-# async def set_model(model: Model):
-#   res = model.model in models.keys()
-#   if res:
-#     return model.model + " is a model"
-#   return model.model + " is not a model"
 
 @app.get("/remove_background/{model_name}" )
 def remove_background(model_name = str):
